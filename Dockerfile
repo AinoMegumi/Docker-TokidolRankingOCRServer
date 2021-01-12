@@ -3,6 +3,7 @@ FROM archlinux:base-devel
 ARG USERNAME=u1and0
 ARG UID=1000
 ARG GID=1000
+ARG PKGVER=4.5.1-1
 COPY mirrorlist /etc/pacman.d/mirrorlist
 RUN pacman -Syu --noconfirm && \
     echo "USERNAME: $USERNAME UID: $UID GID: $GID" &&\
@@ -21,8 +22,8 @@ RUN pacman -Syu --noconfirm && \
     # install OpenCV(enable tesseract support)
     mkdir -p /tmp/install_opencv &&\
     cd /tmp/install_opencv &&\
-    curl -sSL https://github.com/yumetodo/tesseract_opencv_pkg/releases/download/v4.5.0-1/opencv-tesseract-4.5.0-1-x86_64.pkg.tar.zst -o opencv-tesseract-4.5.0-1-x86_64.pkg.tar.zst &&\
-    pacman -U --noconfirm opencv-tesseract-4.5.0-1-x86_64.pkg.tar.zst &&\
+    curl -sSL https://github.com/yumetodo/tesseract_opencv_pkg/releases/download/v${PKGVER}/opencv-tesseract-${PKGVER}-x86_64.pkg.tar.zst -o opencv-tesseract-${PKGVER}-x86_64.pkg.tar.zst &&\
+    pacman -U --noconfirm opencv-tesseract-${PKGVER}-x86_64.pkg.tar.zst &&\
     cd /tmp &&\
     rm -rf install_opencv &&\
     # sudo pacman -Scc <-- doen't work. Why??
